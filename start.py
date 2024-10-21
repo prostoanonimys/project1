@@ -1,3 +1,4 @@
-print("123")
-print("test")
-print("vscodetest")
+import character
+
+print(character.character_characteristic)
+print(character.inventory)
