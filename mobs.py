@@ -1,7 +1,7 @@
 import random
 from character import *
 Slime = {
-    "Health": 10,
+    "Health": 15,
     "Damage": 1,
     "Protection": 1,
     "Shiel":1
@@ -9,17 +9,6 @@ Slime = {
 
 lvl1_mobs = [Slime,]
 
-def enemyaction():
-    emaction = random.randint(1,2)
-    if emaction == 1:
-        print("Враг атакует!")
-        character_characteristic["Health"]-=Slime["Damage"]
-        print(f"Вы получили: {Slime["Damage"]} урона")
-        print(f"Ваше здоровье: {character_characteristic["Health"]}")
-    if emaction ==2:
-        print("Враг защищается!")
-        Slime["Protection"]+=Slime["Shiel"]
-        print(f"{Slime["Protection"]}")
 
 def enemydef(enemy_name):
     if enemy_name == "Slime":
