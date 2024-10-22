@@ -2,19 +2,27 @@ from mobs import *
 from character import *
 
 procentage = 5
+enemy_protection = 0
+player_protection = 0
+
 
 def defense_damage(damage,defense):
     defense_procent = defense*procentage
     clear_damage = int(damage*(1-defense_procent/100))
     return clear_damage
 
+
 # enemyaction
+
+def enemy_protection_cleanse():
+    enemy["Protection"] = enemy["Protection"]-enemy_protection*(1+enemy["Shield"])
 
 def attack_enemy():
     result = defense_damage(enemy["Damage"],character_characteristic["Protection"])
     return result
 
 def enemyaction():
+    global enemy_protection
     emaction = random.randint(1,2)
     if emaction == 1:
         print(decor)
@@ -29,6 +37,7 @@ def enemyaction():
         enemy["Protection"]+=enemy["Shield"]
         print(f"{enemy["Protection"]}")
         print(decor)
+        enemy_protection+=1
 
 # /enemyaction
 
@@ -37,12 +46,15 @@ def enemyaction():
 
 # playeraction
 
+def enemy_protection_cleanse():
+    character_characteristic["Protection"] = character_characteristic["Protection"]-player_protection*(1+character_characteristic["Shield"])
+
 def attack_player():
     result = defense_damage(character_characteristic["Damage"],enemy["Protection"])
     return result
 
 def player_action(enemy):
-    action_protection = 0
+    global player_protection
     for i in range(2):
         while True:
             action=input("Ваш ход:\n1:Удар\n2:Блок\n3:Характеристики противника")
@@ -53,10 +65,10 @@ def player_action(enemy):
                 print(decor)
                 break
             elif action == "2":
-                action_protection+=1
+                player_protection+=1
                 print(decor)
-                print(f"\nВы ставите блок\nВаша защита повышена {action_protection*character_characteristic["Shield"]} ед.")
-                character_characteristic["Protection"]+=1
+                print(f"\nВы ставите блок\nВаша защита повышена {player_protection*character_characteristic["Shield"]} ед.")
+                character_characteristic["Protection"]+=1+enemy["Shield"]
                 print(character_characteristic)
                 print(decor)
                 break
@@ -72,11 +84,14 @@ def player_action(enemy):
 
 def fight(enemy):
     while enemy["Health"] > 0 and character_characteristic["Health"] > 0:
+        enemy_protection_cleanse
         player_action(enemy)
         if enemy["Health"] <= 0:
             print("Вы победили врага!")
             break
         enemyaction()
+        player
+        print(enemy["Protection"])
         if character_characteristic["Health"] <= 0:
             print("Вы проиграли.")
             break
