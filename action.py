@@ -1,22 +1,29 @@
 from mobs import *
 from character import *
-from mobs import *
+
 
 def enemyaction():
     emaction = random.randint(1,2)
     if emaction == 1:
         print(decor)
         print("Враг атакует!")
-        character_characteristic["Health"]-=Slime["Damage"]
-        print(f"Вы получили: {Slime["Damage"]} урона")
+        character_characteristic["Health"]-=enemy["Damage"]
+        print(f"Вы получили: {enemy["Damage"]} урона")
         print(f"Ваше здоровье: {character_characteristic["Health"]}")
         print(decor)
     if emaction ==2:
         print(decor)
         print("Враг защищается!")
-        Slime["Protection"]+=["Shield"]
-        print(f"{Slime["Protection"]}")
+        enemy["Protection"]+=["Shield"]
+        print(f"{enemy["Protection"]}")
         print(decor)
+
+procentage = 5
+
+def defense_damage(damage,defense):
+    defense_procent = defense*procentage
+    clear_damage = int(damage*(1-defense_procent/100))
+    return clear_damage
 
 def player_action(enemy):
     action_protection = 0
@@ -43,6 +50,7 @@ def player_action(enemy):
                 print(decor)
             else:
                 print("Вы ввели неправильное действие")
+
 
 def fight(enemy):
     while enemy["Health"] > 0 and character_characteristic["Health"] > 0:

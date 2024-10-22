@@ -22,20 +22,19 @@ def random_mobe():
 
 choise = random_mobe()
 
-
+enemy_name= lvl1_mobs[choise]
 def enemydef():
-    enemy=lvl1_mobs[choise]
-    return enemy
+    if lvl1_mobs[choise] == "Slime":
+        return Slime
+    elif lvl1_mobs[choise] == "Bat":
+        return Bat
+
+
 
 enemy = enemydef()
 
-# def enemydef(enemy_name):
-#     if enemy_name == "Slime":
-#         enemy = Slime
-#         return enemy
-
 def enemytext(enemy_name):
-    print(mobs_text[str(enemy_name)])
+    print(mobs_text[enemy_name])
 
 mobs_text = {
     "Slime": "Вы слышите отдаленное похлюпывание. И чувствуете что ваши ноги прилепают к полу",
