@@ -5,14 +5,18 @@ from mobs import *
 def enemyaction():
     emaction = random.randint(1,2)
     if emaction == 1:
+        print(decor)
         print("Враг атакует!")
         character_characteristic["Health"]-=Slime["Damage"]
         print(f"Вы получили: {Slime["Damage"]} урона")
         print(f"Ваше здоровье: {character_characteristic["Health"]}")
+        print(decor)
     if emaction ==2:
+        print(decor)
         print("Враг защищается!")
-        Slime["Protection"]+=Slime["Shield"]
+        Slime["Protection"]+=["Shield"]
         print(f"{Slime["Protection"]}")
+        print(decor)
 
 def player_action(enemy):
     action_protection = 0
@@ -20,17 +24,23 @@ def player_action(enemy):
         while True:
             action=input("Ваш ход:\n1:Удар\n2:Блок\n3:Характеристики противника")
             if action == "1":
+                print(decor)
                 enemy["Health"] -= character_characteristic["Damage"]
-                print(f"\nВы нанесли:{character_characteristic["Damage"]}урона \nЗдоровье врага:{enemy["Health"]}\n")
+                print(f"\nВы нанесли:{character_characteristic["Damage"]}урона \nЗдоровье врага:{enemy["Health"]}")
+                print(decor)
                 break
             elif action == "2":
                 action_protection+=1
+                print(decor)
                 print(f"\nВы ставите блок\nВаша защита повышена {action_protection*character_characteristic["Shield"]} ед.")
                 character_characteristic["Protection"]+=1
                 print(character_characteristic)
+                print(decor)
                 break
             elif action == "3":
+                print(decor)
                 print(f"Здоровье:{enemy["Health"]}\n Защита:{enemy["Protection"]}\n Урон:{enemy["Damage"]}")
+                print(decor)
             else:
                 print("Вы ввели неправильное действие")
 

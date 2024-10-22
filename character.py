@@ -8,13 +8,11 @@ character_characteristic= {
     "Shield":1
     }
 
-decor="---------------------------------------------------"
+decor=str("\n---------------------------------------------------\n")
 
 def set_name():
     character_name = input("Введи свое имя")
     character_characteristic["Name"] = character_name
-
-                    
 
 character_equipment = {
     "Weapon": None,
