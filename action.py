@@ -1,29 +1,45 @@
 from mobs import *
 from character import *
 
-
-def enemyaction():
-    emaction = random.randint(1,2)
-    if emaction == 1:
-        print(decor)
-        print("Враг атакует!")
-        character_characteristic["Health"]-=enemy["Damage"]
-        print(f"Вы получили: {enemy["Damage"]} урона")
-        print(f"Ваше здоровье: {character_characteristic["Health"]}")
-        print(decor)
-    if emaction ==2:
-        print(decor)
-        print("Враг защищается!")
-        enemy["Protection"]+=["Shield"]
-        print(f"{enemy["Protection"]}")
-        print(decor)
-
 procentage = 5
 
 def defense_damage(damage,defense):
     defense_procent = defense*procentage
     clear_damage = int(damage*(1-defense_procent/100))
     return clear_damage
+
+# enemyaction
+
+def attack_enemy():
+    result = defense_damage(enemy["Damage"],character_characteristic["Protection"])
+    return result
+
+def enemyaction():
+    emaction = random.randint(1,2)
+    if emaction == 1:
+        print(decor)
+        print("Враг атакует!")
+        character_characteristic["Health"]-=attack_enemy()
+        print(f"Вы получили: {attack_enemy()} урона")
+        print(f"Ваше здоровье: {character_characteristic["Health"]}")
+        print(decor)
+    if emaction ==2:
+        print(decor)
+        print("Враг защищается!")
+        enemy["Protection"]+=enemy["Shield"]
+        print(f"{enemy["Protection"]}")
+        print(decor)
+
+# /enemyaction
+
+
+
+
+# playeraction
+
+def attack_player():
+    result = defense_damage(character_characteristic["Damage"],enemy["Protection"])
+    return result
 
 def player_action(enemy):
     action_protection = 0
@@ -32,8 +48,8 @@ def player_action(enemy):
             action=input("Ваш ход:\n1:Удар\n2:Блок\n3:Характеристики противника")
             if action == "1":
                 print(decor)
-                enemy["Health"] -= character_characteristic["Damage"]
-                print(f"\nВы нанесли:{character_characteristic["Damage"]}урона \nЗдоровье врага:{enemy["Health"]}")
+                enemy["Health"] -= attack_player()
+                print(f"\nВы нанесли:{attack_player()}урона \nЗдоровье врага:{enemy["Health"]}")
                 print(decor)
                 break
             elif action == "2":
@@ -50,6 +66,8 @@ def player_action(enemy):
                 print(decor)
             else:
                 print("Вы ввели неправильное действие")
+
+#/playeraction
 
 
 def fight(enemy):
