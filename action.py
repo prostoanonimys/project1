@@ -46,7 +46,7 @@ def enemyaction():
 
 # playeraction
 
-def enemy_protection_cleanse():
+def player_protection_cleanse():
     character_characteristic["Protection"] = character_characteristic["Protection"]-player_protection*(1+character_characteristic["Shield"])
 
 def attack_player():
@@ -57,7 +57,7 @@ def player_action(enemy):
     global player_protection
     for i in range(2):
         while True:
-            action=input("Ваш ход:\n1:Удар\n2:Блок\n3:Характеристики противника")
+            action=input("Ваш ход:\n1:Удар\n2:Блок\n3:Характеристики противника\n4:Ваши характеристики")
             if action == "1":
                 print(decor)
                 enemy["Health"] -= attack_player()
@@ -76,6 +76,10 @@ def player_action(enemy):
                 print(decor)
                 print(f"Здоровье:{enemy["Health"]}\n Защита:{enemy["Protection"]}\n Урон:{enemy["Damage"]}")
                 print(decor)
+            elif action == "4":
+                print(decor)
+                print(f"Здоровье:{character_characteristic["Health"]}\n Защита:{character_characteristic["Protection"]}\n Урон:{character_characteristic["Damage"]}")
+                print(decor)
             else:
                 print("Вы ввели неправильное действие")
 
@@ -84,13 +88,15 @@ def player_action(enemy):
 
 def fight(enemy):
     while enemy["Health"] > 0 and character_characteristic["Health"] > 0:
-        enemy_protection_cleanse
         player_action(enemy)
+        enemy_protection_cleanse()
         if enemy["Health"] <= 0:
             print("Вы победили врага!")
+            character_characteristic["Experience"]+=enemy["Experience"]
+            print(character_characteristic["Experience"])
             break
         enemyaction()
-        player
+        player_protection_cleanse()
         print(enemy["Protection"])
         if character_characteristic["Health"] <= 0:
             print("Вы проиграли.")

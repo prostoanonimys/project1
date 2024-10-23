@@ -8,14 +8,16 @@ Slime = {
     "Health": 20,
     "Damage": 2,
     "Protection": 1,
-    "Shield":1
+    "Shield":1,
+    "Experience":3
 }
 
 Bat = {
     "Health": 15,
     "Damage": 3,
     "Protection": 0,
-    "Shield":0
+    "Shield":0,
+    "Experience":3
 }
 
 # /enemies_types

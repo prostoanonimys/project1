@@ -5,7 +5,8 @@ character_characteristic= {
     "Protection":2,
     "Gold":0,
     "Level":0,
-    "Shield":1
+    "Shield":1,
+    "Experience":0
     }
 
 decor=str("\n---------------------------------------------------\n")
