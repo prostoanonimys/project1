@@ -78,7 +78,7 @@ def player_action(enemy):
                 print(decor)
             elif action == "4":
                 print(decor)
-                print(f"Здоровье:{character_characteristic["Health"]}\n Защита:{character_characteristic["Protection"]}\n Урон:{character_characteristic["Damage"]}")
+                print(f"Здоровье:{character_characteristic["Health"]}\n Защита:{character_characteristic["Protection"]}\n Урон:{character_characteristic["Damage"]}\nОчки опыта:{character_characteristic["Experience"]}")
                 print(decor)
             else:
                 print("Вы ввели неправильное действие")
